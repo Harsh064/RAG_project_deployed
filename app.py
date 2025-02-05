@@ -4,6 +4,8 @@ from generation import generate_answer
 from database import connect_to_mysql, initialize_chat_history_table, save_chat_message, fetch_chat_history
 from sentence_transformers import SentenceTransformer
 from dotenv import load_dotenv
+from asgiref.wsgi import WsgiToAsgi  # Import the ASGI adapter
+
 load_dotenv()
 
 
@@ -51,4 +53,8 @@ def history():
 if __name__ == '__main__':
     from data_preparation import load_and_prepare_corpus
     chunks = load_and_prepare_corpus('data/sample.txt')  # Load and preprocess data
-    app.run(debug=True)
+    asgi_app = WsgiToAsgi(app)
+    
+    # Run with Uvicorn
+    import uvicorn
+    uvicorn.run(asgi_app,log_level="debug")
