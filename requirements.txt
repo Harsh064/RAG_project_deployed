@@ -1,5 +1,6 @@
 Flask
 gunicorn
+uvicorn
 mysql-connector-python
 sentence-transformers
 faiss-cpu
