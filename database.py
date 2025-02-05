@@ -1,12 +1,27 @@
 import mysql.connector
 from datetime import datetime
 import os
+from urllib.parse import urlparse
 
 def connect_to_mysql():
     """Connect to the MySQL database."""
+    mysql_url = os.environ.get("MYSQL_URL")
+    
+    if not mysql_url:
+        raise ValueError("MYSQL_URL environment variable is not set")
+
+    # Parse the URL
+    url = urlparse(mysql_url)
+
+    # Establish connection
     db = mysql.connector.connect(
-        os.environ.get("MYSQL_URL")
+        host=url.hostname,
+        user=url.username,
+        password=url.password,
+        database=url.path.lstrip('/'),  # Remove leading slash from path
+        port=url.port or 3306  # Default MySQL port
     )
+    
     return db
 
 def initialize_chat_history_table(db):
