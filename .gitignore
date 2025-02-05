@@ -3,3 +3,5 @@ __pycache__
 venv/
 
 vector_store/vector_store.index/
+
+.env

@@ -3,6 +3,9 @@ from embedding_store import load_faiss_index, retrieve_top_k_chunks
 from generation import generate_answer
 from database import connect_to_mysql, initialize_chat_history_table, save_chat_message, fetch_chat_history
 from sentence_transformers import SentenceTransformer
+from dotenv import load_dotenv
+load_dotenv()
+
 
 app = Flask(__name__)
 
