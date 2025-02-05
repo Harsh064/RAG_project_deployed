@@ -1,13 +1,11 @@
 import mysql.connector
 from datetime import datetime
+import os
 
 def connect_to_mysql():
     """Connect to the MySQL database."""
     db = mysql.connector.connect(
-        host="MYSQL_DATABASE",
-        user="root",
-        password="railway",
-        database="chat_history"
+        os.environ.get("MYSQL_URL")
     )
     return db
 
