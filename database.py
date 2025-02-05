@@ -2,6 +2,8 @@ import mysql.connector
 from datetime import datetime
 import os
 from urllib.parse import urlparse
+from dotenv import load_dotenv
+load_dotenv()
 
 def connect_to_mysql():
     """Connect to the MySQL database."""
